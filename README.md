@@ -1,7 +1,7 @@
-# Lochside
+# Hotel API
 ## Brief 
-You are required to create a basic booking system for a small hotel Lochside House. 
-Lochside House has 5 rooms available to hire, 2 Single rooms charged at £100 per night and 3 double rooms at £200 per night. 
+You are required to create a basic booking system for a small hotel. 
+The hotel has 5 rooms available to hire, 2 Single rooms charged at £100 per night and 3 double rooms at £200 per night. 
 Front end access to the booking system is to be handled elsewhere you are only required to create RESTFUL services which expose specific functionality. 
 
 ## Requirements 
