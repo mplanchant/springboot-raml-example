@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.logiccache</groupId>
-    <artifactId>lochside</artifactId>
+    <artifactId>hotel-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>lochside</name>
+    <name>hotel-api</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
