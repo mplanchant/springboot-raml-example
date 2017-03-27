@@ -1,0 +1,40 @@
+#%RAML 0.8
+title: Hotel API
+version: v1
+baseUri: http://api.samplehost.com
+
+/booking:
+  get:
+    queryParameters:
+      customerId:
+        displayName: Customer ID
+        type: string
+        minLength: 10
+        maxLength: 10
+        example: 03217360790
+    responses:
+      200:
+        body:
+          application/json:
+            example: |
+              {
+                "message" : "Hello World"
+              }
+  post:
+  /{roomId}:
+    uriParameters:
+      roomId:
+        type: integer
+    get:
+
+/availability:
+  /{roomId}:
+    uriParameters:
+      roomId:
+    get:
+      queryParameters:
+        fromDate:
+          required: false
+        toDate:
+          required: false
+
