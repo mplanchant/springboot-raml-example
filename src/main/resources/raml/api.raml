@@ -3,38 +3,138 @@ title: Hotel API
 version: v1
 baseUri: http://api.samplehost.com
 
-/booking:
+/bookings:
   get:
     queryParameters:
       customerId:
         displayName: Customer ID
         type: string
-        minLength: 10
-        maxLength: 10
-        example: 03217360790
+        required: false
+      roomId:
+        displayName: Room ID
+        type: string
+        required: false
     responses:
       200:
         body:
           application/json:
-            example: |
+            schema: |
               {
-                "message" : "Hello World"
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/booking"
+                },
+                "definitions": {
+                  "booking": {
+                    "type": "object",
+                    "properties": {
+                      "roomId": {
+                        "type": "string"
+                      },
+                      "customerId": {
+                        "type": "string"
+                      },
+                      "fromDate": {
+                        "javaType":"java.time.LocalDate"
+                      },
+                      "toDate": {
+                        "javaType":"java.time.LocalDate"
+                      }
+                    },
+                    "required": [
+                      "roomId",
+                      "customerId",
+                      "fromDate",
+                      "toDate"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
               }
   post:
-  /{roomId}:
-    uriParameters:
-      roomId:
-        type: integer
-    get:
-
+    body:
+      application/json:
+        schema: |
+            {
+               "$schema": "http://json-schema.org/draft-04/schema#",
+               "type": "object",
+               "properties":{
+                  "roomId":{
+                     "type":"string"
+                  },
+                  "customerId":{
+                     "type":"string"
+                  },
+                  "fromDate":{
+                     "javaType":"java.time.LocalDate"
+                  },
+                  "toDate":{
+                     "javaType":"java.time.LocalDate"
+                  }
+               }
+            }
+    responses:
+      200:
+        body:
+         application/json:
+          schema: |
+            {
+               "$schema": "http://json-schema.org/draft-04/schema#",
+               "type": "object",
+               "properties":{
+                  "message":{
+                     "type":"string"
+                  }
+               }
+            }
 /availability:
   /{roomId}:
     uriParameters:
       roomId:
+        displayName: Room ID
+        type: string
     get:
       queryParameters:
         fromDate:
+          type: string
           required: false
         toDate:
+          type: string
           required: false
+      responses:
+            200:
+              body:
+                application/json:
+                  schema: |
+                    {
+                      "$schema": "http://json-schema.org/draft-04/schema#",
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/availability"
+                      },
+                      "definitions": {
+                        "availability": {
+                          "type": "object",
+                          "properties": {
+                            "roomId": {
+                              "type": "string"
+                            },
+                            "availability": {
+                               "enum": [ "booked", "available" ]
+                            },
+                            "date": {
+                              "javaType":"java.time.LocalDate"
+                            }
+                          },
+                          "required": [
+                            "roomId",
+                            "customerId",
+                            "fromDate",
+                            "toDate"
+                          ],
+                          "additionalProperties": false
+                        }
+                      }
+                    }
 

@@ -45,6 +45,11 @@
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.5</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,23 +64,48 @@
                 <version>0.10.2</version>
                 <configuration>
                     <ramlPath>src/main/resources/raml/api.raml</ramlPath>
-                    <schemaLocation>src/main/resources/schema</schemaLocation>
-                    <basePackage>com.logiccache.hotel</basePackage>
-                    <baseUri>/lochside</baseUri>
+                    <basePackage>com.logiccache.hotel.api</basePackage>
+                    <baseUri>/hotel</baseUri>
+                    <schemaLocation>src/main/resources/raml</schemaLocation>
+                    <generateUnreferencedSchemas>true</generateUnreferencedSchemas>
                     <generationConfig>
+                        <includeJsr303Annotations>true</includeJsr303Annotations>
                         <includeAdditionalProperties>false</includeAdditionalProperties>
+                        <generateBuilders>true</generateBuilders>
+                        <includeAccessors>true</includeAccessors>
+                        <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
+                        <includeToString>true</includeToString>
+                        <useCommonsLang3>true</useCommonsLang3>
+                        <initializeCollections>true</initializeCollections>
                     </generationConfig>
-                    <rule>com.phoenixnap.oss.ramlapisync.generation.rules.Spring4ControllerStubRule</rule>
-                    <ruleConfiguration>
-                    </ruleConfiguration>
+                    <rule>com.phoenixnap.oss.ramlapisync.generation.rules.Spring4ControllerInterfaceRule</rule>
                 </configuration>
                 <executions>
                     <execution>
                         <id>generate-springmvc-endpoints</id>
-                        <phase>compile</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>generate-springmvc-endpoints</goal>
                         </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/</source>
+                            </sources>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
