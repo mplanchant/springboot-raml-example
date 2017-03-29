@@ -38,6 +38,6 @@ public class BookingControllerImpl implements BookingController {
     @Override
     public ResponseEntity<CreateBookingResponse> createBooking(@RequestBody CreateBookingRequest createBookingRequest) {
         Booking booking = bookingService.createBooking(createBookingRequest.getRoomId(), createBookingRequest.getCustomerId(), LocalDate.parse(createBookingRequest.getFromDate()), LocalDate.parse(createBookingRequest.getToDate()));
-        return new ResponseEntity<>(new CreateBookingResponse().withMessage("Created " + booking.getId()), HttpStatus.CREATED);
+        return new ResponseEntity<>(new CreateBookingResponse().withMessage("Created: " + booking), HttpStatus.CREATED);
     }
 }
