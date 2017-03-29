@@ -1,35 +1,34 @@
 package com.logiccache.hotel.api;
 
 import com.logiccache.hotel.api.model.GetAvailabilityByRoomIdResponse;
+import com.logiccache.hotel.services.AvailabilityService;
+import com.logiccache.hotel.util.MapperUtil;
+import org.dozer.DozerBeanMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class AvailabilityControllerImpl implements AvailabilityController {
+
+    private final AvailabilityService availabilityService;
+
+    private final DozerBeanMapper mapper;
+
+    @Autowired
+    public AvailabilityControllerImpl(AvailabilityService availabilityService, DozerBeanMapper mapper) {
+        this.availabilityService = availabilityService;
+        this.mapper = mapper;
+    }
+
     @Override
     public ResponseEntity<List<GetAvailabilityByRoomIdResponse>> getAvailabilityByRoomId(String roomId, String fromDate, String toDate) {
-        GetAvailabilityByRoomIdResponse day1 = new GetAvailabilityByRoomIdResponse()
-                .withAvailability(GetAvailabilityByRoomIdResponse.Availability.AVAILABLE)
-                .withDate(LocalDate.of(2013, Month.JULY, 22))
-                .withRoomId("003");
-        GetAvailabilityByRoomIdResponse day2 = new GetAvailabilityByRoomIdResponse()
-                .withAvailability(GetAvailabilityByRoomIdResponse.Availability.BOOKED)
-                .withDate(LocalDate.of(2013, Month.JULY, 23))
-                .withRoomId("003");
-        GetAvailabilityByRoomIdResponse day3 = new GetAvailabilityByRoomIdResponse()
-                .withAvailability(GetAvailabilityByRoomIdResponse.Availability.BOOKED)
-                .withDate(LocalDate.of(2013, Month.JULY, 24))
-                .withRoomId("003");
-        GetAvailabilityByRoomIdResponse day4 = new GetAvailabilityByRoomIdResponse()
-                .withAvailability(GetAvailabilityByRoomIdResponse.Availability.AVAILABLE)
-                .withDate(LocalDate.of(2013, Month.JULY, 25))
-                .withRoomId("003");
-        return new ResponseEntity<>(Arrays.asList(day1, day2, day3, day4), HttpStatus.OK);
+        List<GetAvailabilityByRoomIdResponse> availability =
+                MapperUtil.mapList(mapper, availabilityService.getAvailability(roomId, LocalDate.parse(fromDate), LocalDate.parse(toDate)), GetAvailabilityByRoomIdResponse.class);
+        return new ResponseEntity<>(availability, HttpStatus.OK);
     }
 }
