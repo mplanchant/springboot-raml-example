@@ -7,6 +7,10 @@
     <mapping>
         <class-a>com.logiccache.hotel.api.model.GetBookingsResponse</class-a>
         <class-b>com.logiccache.hotel.domain.Booking</class-b>
+        <field-exclude>
+            <a>id</a>
+            <b>id</b>
+        </field-exclude>
         <field>
             <a>roomId</a>
             <b>roomId</b>
@@ -28,6 +32,10 @@
     <mapping>
         <class-a>com.logiccache.hotel.api.model.GetAvailabilityByRoomIdResponse</class-a>
         <class-b>com.logiccache.hotel.domain.Availability</class-b>
+        <field-exclude>
+            <a>id</a>
+            <b>id</b>
+        </field-exclude>
         <field>
             <a>roomId</a>
             <b>roomId</b>
