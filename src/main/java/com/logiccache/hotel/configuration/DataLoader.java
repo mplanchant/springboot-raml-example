@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static com.logiccache.hotel.domain.AvailabilityStatus.AVAILABLE;
 import static com.logiccache.hotel.domain.AvailabilityStatus.BOOKED;

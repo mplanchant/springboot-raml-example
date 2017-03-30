@@ -33,6 +33,16 @@ public class BookingControllerImpl implements BookingController {
 
     @Override
     public ResponseEntity<List<GetBookingsResponse>> getBookings(String customerId, String roomId) {
+        return new ResponseEntity<>(MapperUtil.mapList(mapper, bookings(customerId, roomId), GetBookingsResponse.class), HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<CreateBookingResponse> createBooking(@RequestBody CreateBookingRequest createBookingRequest) {
+        Booking booking = bookingService.createBooking(createBookingRequest.getRoomId(), createBookingRequest.getCustomerId(), LocalDate.parse(createBookingRequest.getFromDate()), LocalDate.parse(createBookingRequest.getToDate()));
+        return new ResponseEntity<>(new CreateBookingResponse().withMessage("Created: " + booking), HttpStatus.CREATED);
+    }
+
+    private List<Booking> bookings(String customerId, String roomId) {
         List<Booking> bookings;
         if (hasText(customerId) && hasText(roomId)) {
             bookings = bookingService.getBookings(roomId, customerId);
@@ -43,12 +53,6 @@ public class BookingControllerImpl implements BookingController {
         } else {
             bookings = bookingService.getBookings();
         }
-        return new ResponseEntity<>(MapperUtil.mapList(mapper, bookings, GetBookingsResponse.class), HttpStatus.OK);
-    }
-
-    @Override
-    public ResponseEntity<CreateBookingResponse> createBooking(@RequestBody CreateBookingRequest createBookingRequest) {
-        Booking booking = bookingService.createBooking(createBookingRequest.getRoomId(), createBookingRequest.getCustomerId(), LocalDate.parse(createBookingRequest.getFromDate()), LocalDate.parse(createBookingRequest.getToDate()));
-        return new ResponseEntity<>(new CreateBookingResponse().withMessage("Created: " + booking), HttpStatus.CREATED);
+        return bookings;
     }
 }

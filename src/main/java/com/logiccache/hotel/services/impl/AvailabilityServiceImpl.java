@@ -21,6 +21,12 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Override
     public List<Availability> getAvailability(String roomId, LocalDate fromDate, LocalDate toDate) {
-        return repository.findAll();
+        return repository.findByRoomIdAndDateAfterAndDateBefore(roomId, fromDate, toDate);
     }
+
+    @Override
+    public List<Availability> getAvailability(String roomId) {
+        return repository.findByRoomId(roomId);
+    }
+
 }
