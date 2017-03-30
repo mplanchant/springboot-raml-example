@@ -9,11 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import static org.springframework.util.StringUtils.hasText;
 
 @Component
 public class AvailabilityControllerImpl implements AvailabilityController {
@@ -31,7 +32,7 @@ public class AvailabilityControllerImpl implements AvailabilityController {
     @Override
     public ResponseEntity<List<GetAvailabilityByRoomIdResponse>> getAvailabilityByRoomId(@PathVariable String roomId, String fromDate, String toDate) {
         List<Availability> availability;
-        if (StringUtils.hasText(fromDate) && StringUtils.hasText(toDate)) {
+        if (hasText(fromDate) && hasText(toDate)) {
             availability = availabilityService.getAvailability(roomId, LocalDate.parse(fromDate), LocalDate.parse(toDate));
         } else {
             availability = availabilityService.getAvailability(roomId);
