@@ -4,12 +4,12 @@ import com.logiccache.hotel.domain.Booking;
 import com.logiccache.hotel.repositories.BookingRepository;
 import com.logiccache.hotel.services.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Component("bookingService")
+@Service("bookingService")
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository repository;

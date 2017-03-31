@@ -12,8 +12,8 @@ public class DozerConfiguration {
     @Bean(name = "org.dozer.Mapper")
     public DozerBeanMapper dozerBean() {
         List<String> mappingFiles = Arrays.asList("dozer-configration-mapping.xml");
-        DozerBeanMapper dozerBean = new DozerBeanMapper();
-        dozerBean.setMappingFiles(mappingFiles);
-        return dozerBean;
+        DozerBeanMapper dozer = new DozerBeanMapper();
+        dozer.setMappingFiles(mappingFiles);
+        return dozer;
     }
 }

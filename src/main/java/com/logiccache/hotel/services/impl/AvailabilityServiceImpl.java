@@ -4,12 +4,12 @@ import com.logiccache.hotel.domain.Availability;
 import com.logiccache.hotel.repositories.AvailabilityRepository;
 import com.logiccache.hotel.services.AvailabilityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@Component("availabilityService")
+@Service("availabilityService")
 public class AvailabilityServiceImpl implements AvailabilityService {
 
     private final AvailabilityRepository repository;
