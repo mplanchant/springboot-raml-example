@@ -22,8 +22,8 @@ public class MapperUtilTest {
     @Autowired
     private DozerBeanMapper mapper;
 
-    @Ignore
     @Test
+    @Ignore
     public void testAssembleSomeObject() throws Exception {
         Booking source = Booking.builder().roomId("room").customerId("customer").fromDate(LocalDate.of(2010, Month.AUGUST, 21)).toDate(LocalDate.of(2010, Month.AUGUST, 22)).build();
         GetBookingsResponse destination = mapper.map(source, GetBookingsResponse.class);

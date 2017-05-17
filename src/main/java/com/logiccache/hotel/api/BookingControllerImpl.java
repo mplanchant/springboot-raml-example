@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.time.LocalDate;
 import java.util.List;
 
+import static org.springframework.util.StringUtils.hasText;
+
 @Component
 public class BookingControllerImpl implements BookingController {
 
@@ -31,8 +33,17 @@ public class BookingControllerImpl implements BookingController {
 
     @Override
     public ResponseEntity<List<GetBookingsResponse>> getBookings(String customerId, String roomId) {
-        List<GetBookingsResponse> bookings = MapperUtil.mapList(mapper, bookingService.getBookings(roomId, customerId), GetBookingsResponse.class);
-        return new ResponseEntity<>(bookings, HttpStatus.OK);
+        List<Booking> bookings;
+        if (hasText(customerId) && hasText(roomId)) {
+            bookings = bookingService.getBookings(roomId, customerId);
+        } else if (hasText(customerId)) {
+            bookings = bookingService.getBookingsByCustomer(customerId);
+        } else if (hasText(roomId)) {
+            bookings = bookingService.getBookingsByRoom(roomId);
+        } else {
+            bookings = bookingService.getBookings();
+        }
+        return new ResponseEntity<>(MapperUtil.mapList(mapper, bookings, GetBookingsResponse.class), HttpStatus.OK);
     }
 
     @Override

@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.Month;
-import java.util.Arrays;
 import java.util.List;
 
 @Component("bookingService")
@@ -22,8 +20,23 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<Booking> getBookings(String roomId, String customerId) {
+    public List<Booking> getBookings() {
         return repository.findAll();
+    }
+
+    @Override
+    public List<Booking> getBookings(String roomId, String customerId) {
+        return repository.findByRoomIdAndCustomerId(roomId, customerId);
+    }
+
+    @Override
+    public List<Booking> getBookingsByRoom(String roomId) {
+        return repository.findByRoomId(roomId);
+    }
+
+    @Override
+    public List<Booking> getBookingsByCustomer(String customerId) {
+        return repository.findByCustomerId(customerId);
     }
 
     @Override
