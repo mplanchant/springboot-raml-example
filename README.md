@@ -1,4 +1,4 @@
-# Hotel API
+# Hotel API [![Build Status](https://travis-ci.com/mplanchant/springboot-raml-example.svg?branch=master)](https://travis-ci.com/mplanchant/springboot-raml-example)
 ## Brief 
 You are required to create a basic booking system for a small hotel. 
 The hotel has 5 rooms available to hire, 2 Single rooms charged at £100 per night and 3 double rooms at £200 per night. 
