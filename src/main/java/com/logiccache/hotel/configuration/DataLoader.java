@@ -38,7 +38,7 @@ public class DataLoader implements ApplicationRunner {
     private void createBookingData() {
         Booking booking1 = Booking.builder().roomId("001").customerId("100").fromDate(LocalDate.of(2017, Month.APRIL, 1)).toDate(LocalDate.of(2017, Month.APRIL, 10)).build();
         Booking booking2 = Booking.builder().roomId("001").customerId("200").fromDate(LocalDate.of(2017, Month.MAY, 12)).toDate(LocalDate.of(2017, Month.MAY, 15)).build();
-        bookingRepository.save(Arrays.asList(booking1, booking2));
+        bookingRepository.saveAll(Arrays.asList(booking1, booking2));
     }
 
     private void createAvailabilityData() {
@@ -46,7 +46,7 @@ public class DataLoader implements ApplicationRunner {
         Availability day2 = Availability.builder().roomId("003").date(LocalDate.of(2013, Month.JULY, 23)).availability(BOOKED).build();
         Availability day3 = Availability.builder().roomId("003").date(LocalDate.of(2013, Month.JULY, 24)).availability(BOOKED).build();
         Availability day4 = Availability.builder().roomId("003").date(LocalDate.of(2013, Month.JULY, 25)).availability(AVAILABLE).build();
-        availabilityRepository.save(Arrays.asList(day1, day2, day3, day4));
+        availabilityRepository.saveAll(Arrays.asList(day1, day2, day3, day4));
     }
 
 }
