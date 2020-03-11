@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,7 +31,7 @@ public class AvailabilityControllerImpl implements AvailabilityController {
     }
 
     @Override
-    public ResponseEntity<List<GetObjectResponse>> getGetObjectResponses(@PathVariable String roomId, String fromDate, String toDate) {
+    public ResponseEntity<List<GetObjectResponse>> getGetObjectResponses(@PathVariable String roomId, @RequestParam(required = false) String fromDate, @RequestParam(required = false) String toDate) {
         List<Availability> availability;
         if (hasText(fromDate) && hasText(toDate)) {
             availability = availabilityService.getAvailability(roomId, LocalDate.parse(fromDate), LocalDate.parse(toDate));

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -37,9 +38,10 @@ public class BookingControllerImpl implements BookingController {
     }
 
     @Override
-    public ResponseEntity<CreateCreateBookingsRequestResponse> createCreateBookingsRequest(@Valid CreateBookingsRequest createBookingsRequest) {
+    public ResponseEntity<CreateCreateBookingsRequestResponse> createCreateBookingsRequest(@Valid @RequestBody CreateBookingsRequest createBookingsRequest) {
         Booking booking = bookingService.createBooking(createBookingsRequest.getRoomId(), createBookingsRequest.getCustomerId(), LocalDate.parse(createBookingsRequest.getFromDate()), LocalDate.parse(createBookingsRequest.getToDate()));
-        return new ResponseEntity<>(new CreateCreateBookingsRequestResponse().withMessage("Created: " + booking), HttpStatus.CREATED);    }
+        return new ResponseEntity<>(new CreateCreateBookingsRequestResponse().withMessage("Created: " + booking), HttpStatus.CREATED);
+    }
 
     private List<Booking> bookings(String customerId, String roomId) {
         List<Booking> bookings;
