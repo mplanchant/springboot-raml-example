@@ -89,7 +89,7 @@
             <plugin>
                 <groupId>com.phoenixnap.oss</groupId>
                 <artifactId>springmvc-raml-plugin</artifactId>
-                <version>0.10.2</version>
+                <version>2.0.5</version>
                 <configuration>
                     <ramlPath>src/main/resources/raml/api.raml</ramlPath>
                     <basePackage>com.logiccache.hotel.api</basePackage>
@@ -106,7 +106,6 @@
                         <useCommonsLang3>true</useCommonsLang3>
                         <initializeCollections>true</initializeCollections>
                     </generationConfig>
-                    <rule>com.phoenixnap.oss.ramlapisync.generation.rules.Spring4ControllerInterfaceRule</rule>
                 </configuration>
                 <executions>
                     <execution>

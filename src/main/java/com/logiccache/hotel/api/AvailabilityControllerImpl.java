@@ -1,6 +1,6 @@
 package com.logiccache.hotel.api;
 
-import com.logiccache.hotel.api.model.GetAvailabilityByRoomIdResponse;
+import com.logiccache.hotel.api.model.GetObjectResponse;
 import com.logiccache.hotel.domain.Availability;
 import com.logiccache.hotel.services.AvailabilityService;
 import com.logiccache.hotel.util.MapperUtil;
@@ -17,7 +17,7 @@ import java.util.List;
 import static org.springframework.util.StringUtils.hasText;
 
 @Component
-public class AvailabilityControllerImpl implements AvailabilityController {
+public class AvailabilityControllerImpl extends AvailabilityController {
 
     private final AvailabilityService availabilityService;
 
@@ -30,13 +30,13 @@ public class AvailabilityControllerImpl implements AvailabilityController {
     }
 
     @Override
-    public ResponseEntity<List<GetAvailabilityByRoomIdResponse>> getAvailabilityByRoomId(@PathVariable String roomId, String fromDate, String toDate) {
+    public ResponseEntity<List<GetObjectResponse>> getGetObjectResponses(@PathVariable String roomId, String fromDate, String toDate) {
         List<Availability> availability;
         if (hasText(fromDate) && hasText(toDate)) {
             availability = availabilityService.getAvailability(roomId, LocalDate.parse(fromDate), LocalDate.parse(toDate));
         } else {
             availability = availabilityService.getAvailability(roomId);
         }
-        return new ResponseEntity<>(MapperUtil.mapList(mapper, availability, GetAvailabilityByRoomIdResponse.class), HttpStatus.OK);
+        return new ResponseEntity<>(MapperUtil.mapList(mapper, availability, GetObjectResponse.class), HttpStatus.OK);
     }
 }

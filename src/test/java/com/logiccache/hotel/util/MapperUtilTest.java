@@ -1,6 +1,6 @@
 package com.logiccache.hotel.util;
 
-import com.logiccache.hotel.api.model.GetBookingsResponse;
+import com.logiccache.hotel.api.model.GetObjectResponse;
 import com.logiccache.hotel.domain.Booking;
 import org.dozer.DozerBeanMapper;
 import org.junit.Ignore;
@@ -26,7 +26,7 @@ public class MapperUtilTest {
     @Ignore
     public void testAssembleSomeObject() throws Exception {
         Booking source = Booking.builder().roomId("room").customerId("customer").fromDate(LocalDate.of(2010, Month.AUGUST, 21)).toDate(LocalDate.of(2010, Month.AUGUST, 22)).build();
-        GetBookingsResponse destination = mapper.map(source, GetBookingsResponse.class);
+        GetObjectResponse destination = mapper.map(source, GetObjectResponse.class);
         Booking mappedSource = mapper.map(destination, Booking.class);
         assertEquals("fields not mapped correctly", source, mappedSource);
     }
