@@ -106,6 +106,7 @@
                         <useCommonsLang3>true</useCommonsLang3>
                         <initializeCollections>true</initializeCollections>
                     </generationConfig>
+                    <rule>com.phoenixnap.oss.ramlplugin.raml2code.rules.Spring4ControllerInterfaceRule</rule>
                 </configuration>
                 <executions>
                     <execution>

@@ -19,7 +19,7 @@ import java.util.List;
 import static org.springframework.util.StringUtils.hasText;
 
 @Component
-public class BookingControllerImpl extends BookingController {
+public class BookingControllerImpl implements BookingController {
 
     private final BookingService bookingService;
 

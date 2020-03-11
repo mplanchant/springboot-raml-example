@@ -17,7 +17,7 @@ import java.util.List;
 import static org.springframework.util.StringUtils.hasText;
 
 @Component
-public class AvailabilityControllerImpl extends AvailabilityController {
+public class AvailabilityControllerImpl implements AvailabilityController {
 
     private final AvailabilityService availabilityService;
 
